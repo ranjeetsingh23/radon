@@ -1,12 +1,14 @@
 const express = require('express');
 const externalModule = require('./logger')
-
+const underscore = require('underscore')
 const router = express.Router();
 
 router.get('/test-me', function (req, res) {
     console.log('The constant in logger route has a value '+externalModule.endpoint)
     console.log('The current batch is '+externalModule.batch)
     externalModule.log()
+    let firstElement = underscore.first(['ranjeet','ankita','shivam'])
+    console.log('the first element recived is '+firstElement)
     res.send('My first ever api!')
 });
 
