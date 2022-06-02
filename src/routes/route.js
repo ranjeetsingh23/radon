@@ -30,22 +30,30 @@ router.get('/test-me4', function (req, res) {
 
 router.get('/sol1', function (req, res) {
     const arr =[1,2,3,5,6,7] 
-    let n = arr.length;
-    let missingNumber = Math.floor((n+1)*(n+2) / 2);
-        for (let i = 0; i < n; i++)
-            missingNumber = missingNumber- arr[i];
+    let total =0
+    for(var i in arr){
+        total += arr[i]
+    }
+    let lastDigit = arr.pop()
+    let sumOfNumber = lastDigit * (lastDigit + 1)/2
+     let missingNumber = sumOfNumber - total
 
      res.send(  { data: missingNumber  }  );
 });
 
 router.get('/sol2',function (req,res){
     const arr = [33,34, 35, 37, 38]
-    let n = arr.length+1;
-   
-    let missingNumber
-    let first = a[i]
-    let last =
-    sumOfnConsicutive= n * (first + last) / 2
+    
+    let len = arr.length
+    
+    let total = 0
+    for(var i in arr){
+        total += arr[i]
+    }
+    let first = arr[0]
+    let last = arr.pop()
+    let sum = (len+1) * (first + last)/2
+    let missingNumber = sum - total
     res.send(  { data: missingNumber  }  )
 }
 )
