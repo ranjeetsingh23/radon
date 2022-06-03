@@ -43,13 +43,12 @@ router.get('/movies',function(req,res){
 }
 )
 router.get('/movies/:indexNumber',function(req,res){
-    const arrMovies =['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
-    let a = arrMovies.length
-    if(arrMovies[req.params.indexNumber]>a){
-        console.log("Number is greater")
-    }else{
-    res.send(arrMovies[req.params.indexNumber])
+    const arrMovies =['‘Rang de basanti’, ‘The shining’, ‘Lord of the rings’, ‘Batman begins’']
+    let num= req.params.indexNumber
+    if(num >=Array.length){
+        console.log(" use a valid index in an error message.")
     }
+    res.send( { movie: "the movie is: " + arrMovies[num] })
 }
 )
 router.get('/films',function(req,res){
@@ -84,13 +83,11 @@ router.get('/films/:filmid',function(req,res){
         "id": 4,
         "name": "Finding Nemo"
        }]
-    //    const result = arrString.find(ele => ele.arrString.id === 'filmid')
-    // if (arrString){
-    //   return console.log(arrString.id+ ' '+arrString.name)
-    // }else{
-    //    return console.log("no id available "+'filmid')
-    // }
-      res.send("done");
+       let num= req.params.filmid
+       if(num >=Array.length){
+           console.log(" use a valid index in an error message.")
+       }
+       res.send( { movie: "the movie is: " + arrString[num] })
 })
 module.exports = router;
 // adding this comment for no reason
