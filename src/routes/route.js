@@ -83,11 +83,10 @@ router.get('/films/:filmid',function(req,res){
         "id": 4,
         "name": "Finding Nemo"
        }]
-       let num= req.params.filmid
-       if(num >=Array.length){
-           console.log(" use a valid index in an error message.")
+       let f = arrString[req.params.filmid -1]
+       if(f !== arrString.length){
+           res.send(f || "no movies exists with this id")
        }
-       res.send( { movie: "the movie is: " + arrString[num] })
 })
 module.exports = router;
 // adding this comment for no reason
