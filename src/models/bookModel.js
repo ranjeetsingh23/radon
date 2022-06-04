@@ -5,7 +5,7 @@ const bookSchema = new mongoose.Schema( {
     authorName: String,
     category: {
         type: String,
-        enum: ["Love story", "Suspense", "Romantic","finance","Trading","Development"] 
+        enum: ["Love story", "Suspense", "Romantic","finance","Trading","Development","Science"] 
     },
     year: Number,
 }, { timestamps: true });

@@ -7,8 +7,8 @@ const addBooks= async function (req, res) {
 }
 
 const getBooksData= async function (req, res) {
-    let allUsers= await BookModel.find()
-    res.send({msg: allUsers})
+    let allBooks= await BookModel.find()
+    res.send({msg: allBooks})
 }
 
 module.exports.addBooks= addBooks
