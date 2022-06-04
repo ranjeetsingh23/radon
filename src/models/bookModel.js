@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const bookSchema = new mongoose.Schema( {
+const bookSchema = new mongoose.Schema({
     bookName: String,
     authorName: String,
     category: {
         type: String,
-        enum: ["Love story", "Suspense", "Romantic","finance","Trading","Development","Science"] 
+        enum: ["Love story", "Suspense", "Romantic", "Finance", "Trading", "Development", "Science","Others"]
     },
     year: Number,
 }, { timestamps: true });
