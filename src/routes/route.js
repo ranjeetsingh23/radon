@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const BookModel = require("../models/bookModel.js")
-const UserController = require("../controllers/userController")
+const UserController = require("../controllers/bookController")
 
 
 router.post("/addBooks", UserController.addBooks)
