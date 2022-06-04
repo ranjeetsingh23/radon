@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const BookModel = require("../models/bookModel.js")
-const UserController = require("../controllers/bookController")
+//const BookModel = require("../models/bookModel.js")
+const BookController = require("../controllers/bookController")
 
 
-router.post("/addBooks", UserController.addBooks)
+router.post("/addBooks", BookController.addBooks)
 
-router.get("/getBooksData", UserController.getBooksData)
+router.get("/getBooksData", BookController.getBooksData)
 
 module.exports = router;
