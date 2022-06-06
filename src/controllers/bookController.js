@@ -1,5 +1,4 @@
 const { count } = require("console")
-//const bookModel = require("../models/bookModel")
 const BookModel= require("../models/bookModel")
 
 const createBook= async function (req, res) {
@@ -37,6 +36,24 @@ const getRandomBooks = async function(req,res){
     })
     res.send({msg: randomBooks})
 }
+
+module.exports.createBook = createBook
+module.exports.bookList = bookList
+module.exports.getRandomBooks = getRandomBooks
+module.exports.getXINRBooks = getXINRBooks
+module.exports.getBooksInYear=getBooksInYear
+module.exports.getParticularBooks = getParticularBooks
+
+
+
+
+
+
+
+
+
+
+
 
 /*const getBooksData= async function (req, res) {
 
@@ -111,9 +128,3 @@ const getRandomBooks = async function(req,res){
 //}
 
 
-module.exports.createBook = createBook
-module.exports.bookList = bookList
-module.exports.getRandomBooks = getRandomBooks
-module.exports.getXINRBooks = getXINRBooks
-module.exports.getBooksInYear=getBooksInYear
-module.exports.getParticularBooks = getParticularBooks
