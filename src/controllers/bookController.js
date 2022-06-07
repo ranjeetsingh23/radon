@@ -1,26 +1,17 @@
 const { count } = require("console")
-
 const bookModel= require("../models/bookModel")
 const authorModel= require("../models/authorModel")
 
 
-
-
-
-
-
-
 const createBook= async function (req, res) {
     let data= req.body
-
-    let savedData= await BookModel.create(data)
+    let savedData= await bookModel.create(data)
     res.send({msg: savedData})
 }
 
 const createAuthor= async function (req, res) {
     let data= req.body
-
-    let savedData= await AuthorModel.create(data)
+    let savedData= await authorModel.create(data)
     res.send({msg: savedData})
 }
 
@@ -32,7 +23,7 @@ const getBook = async function(req,res){
 
  const findAndUpdate = async function(req,res){
 
-     let books = await bookModel.findOneAndUpdate(  {bookName: "Two states" } , {$set: {price : 100} }, { new: true}  );
+     let books = await bookModel.findOneAndUpdate(  {bookName: "Two states" } , {$set: {price : 100} }, { new: true});
      let authorData= await authorModel.find({author_id:books.author_id}).select("authorName")
      let price = books.price
      res.send({msg: authorData,price})
@@ -58,7 +49,6 @@ const booksCost = async function(req,res){
 
 
 module.exports.createBook = createBook
-
 module.exports.createAuthor = createAuthor
 module.exports.getBook = getBook
 module.exports.findAndUpdate = findAndUpdate
