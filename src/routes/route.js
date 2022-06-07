@@ -4,17 +4,19 @@ const BookController= require("../controllers/bookController")
 
 
 
+
 router.post("/createBook", BookController.createBook  )
 
-router.get("/bookList", BookController.bookList)
 
-router.post("/getBooksInYear", BookController.getBooksInYear)
+router.post("/createAuthor", BookController.createAuthor)
 
-router.post("/getParticularBooks", BookController.getParticularBooks)
+router.get("/getBook", BookController.getBook)
 
-router.get("/getRandomBooks", BookController.getRandomBooks)
+router.get("/findAndUpdate", BookController.findAndUpdate)
 
-router.get("/getXINRBooks", BookController.getXINRBooks)
+
+router.get("/booksCost", BookController.booksCost)
+
 
 module.exports = router;
 
