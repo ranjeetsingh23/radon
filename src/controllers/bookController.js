@@ -11,6 +11,8 @@ const createBook= async function (req, res) {
 
 const createAuthor= async function (req, res) {
     let data= req.body
+    let author_id=data.author_id
+    if(!author_id) return res.send({msg: "Author id is mandatory"})
     let savedData= await authorModel.create(data)
     res.send({msg: savedData})
 }
