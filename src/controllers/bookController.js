@@ -47,7 +47,41 @@ const booksCost = async function(req,res){
     res.send({msg: author_name})
 }
 
+ const getBooksName = async function(req,res){
+     
+    let data = req.params.author_id
+    let books = await bookModel.find({author_id:data})
+    let output = books.map(inp => inp.bookName)
+    res.send({msg: output})
+}
 
+  const listAuthor = async function(req,res){
+          let ratingData = await bookModel.find({ rating: {$gt: 4} }).select({ author_id: 1, rating:1})
+          let output = ratingData.map(inp => inp.author_id)
+         console.log(output)
+          let ageData = await authorModel.find({ age:{$gt: 50}}).select({author_id:1, age:1, })
+         let op = ageData.map(inp => inp.author_id)
+          console.log(op)
+          
+        //   let temp =[]
+        //   if(op.author_id == output.author_id){
+        //      temp.push(op)
+        //      console.log(temp)
+        //   }
+        //   const author = await authorModel.find({ author_id:temp}).select({authorName:1,age:1, _id:0})
+         // res.send({msg: author})
+
+    //      let temp = []
+
+    // for(let i=0;i<op.length;i++){
+    //     let x = op[i]
+    //     const author = await authorModel.find({ author_id:x}).select({authorName:1, age:1,_id:0})
+    //     temp.push(author)
+    // }
+
+      const author_name = temp.flat()
+      res.send({msg : author_name})
+  }
 
 
 module.exports.createBook = createBook
@@ -55,6 +89,10 @@ module.exports.createAuthor = createAuthor
 module.exports.getBook = getBook
 module.exports.findAndUpdate = findAndUpdate
 module.exports.booksCost = booksCost
+module.exports.getBooksName = getBooksName
+module.exports.listAuthor = listAuthor
+
+
 
 
 // const bookList = async function(req,res){
