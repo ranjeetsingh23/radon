@@ -4,34 +4,32 @@ const authorModel = require("../models/authorModel")
 const publisherModel = require("../models/publisherModel")
 
 
-const createBook = async function (req, res) {
-
+const createBook= async function (req, res) {
     let book = req.body
-    let author_id = await authorModel.find().select({ _id: 1 })
-    let authorIdArr = author_id.map((x) => { return x._id.toString() })
+    
+    let authorId = await authorModel.find().select({_id: 1})
+    authorIdArr = authorId.map((obj) => {return obj._id.toString()})
 
-    let publishId = await publisherModel.find().select({ _id: 1 })
-    let publishIdArr = publishId.map((x) => { return x._id.toString() })
+    let publishedId = await publisherModel.find().select({_id: 1})
+    publishedIdArr = publishedId.map((obj) => {return obj._id.toString()})
 
-    if (book.author_id != undefined) {
-        if (authorIdArr.includes(book.author_id)) {
-            if (book.publishId != undefined) {
-                if (publishIdArr.includes(book.publisher_id)) {
+    if(book.author!= undefined){
+        if(authorIdArr.includes(book.author)){
+            if(book.publisher != undefined){
+                if(publishedIdArr.includes(book.publisher)){
                     let bookCreated = await bookModel.create(book)
-                    return res.send({ data: bookCreated })
+                    return res.send( {data: bookCreated})
                 }
-                return res.send({ data: "Invalid Publisher ID" })
+                return res.send("Invalid Publisher Id")
             }
-            return res.send({ data: "Publisher ID Required" })
+            return res.send("Missing Publisher Id")
         }
-        return res.send({ data: "Invalid Author ID" })
+        return res.send("Invalid Author Id")
     }
-    return res.send({ data: "Author ID Required" })
+    return res.send("Missing Author Id")
+
+    
 }
-
-
-
-
 const getBooksWithAuthor_PublisherDetails = async function (req, res) {
     let specificBook = await bookModel.find().populate([{ path: 'author' }, { path: 'publisher' }])
     res.send({ data: specificBook })

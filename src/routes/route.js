@@ -12,7 +12,7 @@ router.get("/test-me", function (req, res) {
 //Author API
 router.post("/createAuthor", authorController.createAuthor  )
 
-router.get("/getAuthorsData", authorController.getAuthorsData)
+//router.get("/getAuthorsData", authorController.getAuthorsData)
 
 //Publisher API
 router.post("/createPublisher", publisherController.createPublisher)
