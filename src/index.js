@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
     function(req,res,next){
        const today = moment();
-        console.log(today.format()+ ", " + req.ip + ", " + req.path);
+        console.log(today.format('YYYY-MM-DD HH:MM:SS')+ ", " + req.ip + ", " + req.path);
     }
 )
 app.use('/', route);
