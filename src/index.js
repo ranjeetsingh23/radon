@@ -11,6 +11,7 @@ app.use(
     function(req,res,next){
        const today = moment();
         console.log(today.format('YYYY-MM-DD HH:MM:SS')+ ", " + req.ip + ", " + req.path);
+        next()
     }
 )
 app.use('/', route);
