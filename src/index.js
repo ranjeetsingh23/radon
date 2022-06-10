@@ -1,10 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
+const { timeStamp } = require('console');
+const moment = require('moment')
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+    function(req,res,next){
+       const today = moment();
+        console.log(today.format()+ ", " + req.ip + ", " + req.path);
+    }
+)
 app.use('/', route);
 
 app.listen(process.env.PORT || 3000, function() {
