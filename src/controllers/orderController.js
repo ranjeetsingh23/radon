@@ -11,12 +11,15 @@ const createOrder= async function (req, res) {
     product_idArr = product_id.map((x) => {return x._id.toString()})
 
     if(user_idArr.includes(data.userId) &&  product_idArr.includes(data.productId)){
+      //  if(data.isFreeAppUser == false && data.balance >= productModel.price){
            
         let savedData= await OrderModel.create(data)
         res.send({msg: savedData})
-    }
+    //} 
+    //return res.send({msg: "Insufficient Balance"})
+}
        
-return res.send({msg: "not available"})
+return res.send({msg: "ID not available in database"})
     
    
 }
