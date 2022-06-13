@@ -1,11 +1,24 @@
 const { count } = require("console")
 const OrderModel = require("../models/orderModel")
-
+const productModel = require("../models/productModel")
+const userModel = require("../models/userModel")
 const createOrder= async function (req, res) {
-    //let data= req.body
+    let data= req.body
+    let user_id = await userModel.find().select({_id:1})
+    user_idArr = user_id.map((x) => {return x._id.toString()})
+
+    let product_id = await productModel.find().select({_id:1})
+    product_idArr = product_id.map((x) => {return x._id.toString()})
+
+    if(user_idArr.includes(data.userId) &&  product_idArr.includes(data.productId)){
+           
+        let savedData= await OrderModel.create(data)
+        res.send({msg: savedData})
+    }
+       
+return res.send({msg: "not available"})
     
-    let savedData= await OrderModel.create(data)
-    res.send({msg: savedData})
+   
 }
 
 

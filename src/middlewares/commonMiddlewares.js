@@ -22,14 +22,14 @@
 
 const CheckisFreeAppUser = async function (req, res, next) {
 
-    let check = req.headers["isfreeappuser"]
-    if (!check) {
-        res.send("Free App user header is mandatory")
+    if ( !req.headers['isfreeappuser']) {
+       return res.send({msg:"Free App user header is mandatory"})
     }
     next()
 }
 
+
 const checkValidation = async function (req,res,next){
-    
+
 }
 module.exports.CheckisFreeAppUser = CheckisFreeAppUser
