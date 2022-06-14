@@ -70,7 +70,6 @@ const updateUser = async function (req, res) {
 };
 
 const deleteUser = async function (req, res) {
-  let userId = req.params.userId;
 
   let userData = req.params.userId;
   let deletedUser = await userModel.findOneAndUpdate({ _id: userData }, { $set: { isDeleted: true } }, { new: true });
