@@ -8,6 +8,7 @@ router.get("/test-me", function (req, res) {
 })
 //API to createUser
 router.post("/users", userController.createUser)
+
 //API to Login User
 router.post("/login", userController.loginUser)
 
