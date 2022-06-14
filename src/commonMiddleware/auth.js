@@ -1,5 +1,3 @@
-
-
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 const tokenIsPresent_Valid = async function (req, res, next) {
