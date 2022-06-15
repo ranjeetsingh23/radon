@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
+const jwt = require('jsonwebtoken');
 const { default: mongoose } = require('mongoose');
 const app = express();
 
