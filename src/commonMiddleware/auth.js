@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const userModel = require("../models/userModel");
-const authenticate = async function (req, res, next) {
+const authenticate =  function (req, res, next) {
     let token = req.headers["x-Auth-token"];
     if (!token) token = req.headers["x-auth-token"];
 
@@ -11,18 +11,19 @@ const authenticate = async function (req, res, next) {
       if (!decodedToken)
           return res.send({ status: false, msg: "token is invalid" });
      console.log(token)
-     let userId = req.params.userId;
-         let userDetails = await userModel.findById(userId);
-          if (!userDetails)
-              return res.send({ status: false, msg: "No such user exists" });
+     
     next()
 }
 
- const authorise = function(req, res, next) {
+ const authorise =async function(req, res, next) {
+    let userToBeModified = req.params.userId
+         let userDetails = await userModel.findById(userToBeModified);
+          if (!userDetails)
+               return res.send({ status: false, msg: "No such user exists" });
+
     let token = req.headers["x-auth-token"];
     let decodedToken = jwt.verify(token, "functionup-radon");
     // comapre the logged in user's id and the id in request
-    let userToBeModified = req.params.userId
  // userId for the logged-in user
   let userLoggedIn = decodedToken.userId
  //  userId comparision to check if the logged-in user is requesting for their own data
@@ -30,16 +31,7 @@ const authenticate = async function (req, res, next) {
     next()
 }
 
-// const userExist = async function (req, res, next) {
-//     let userId = req.params.userId;
-//     let userDetails = await userModel.findById(userId);
-//     if (!userDetails)
-//         return res.send({ status: false, msg: "No such user exists" });
-//     next()
-// }
 
-
-//module.exports.userExist = userExist
 
 module.exports.authenticate = authenticate
 
