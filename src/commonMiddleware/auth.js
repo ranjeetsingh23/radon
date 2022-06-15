@@ -27,16 +27,16 @@ const authenticate = async function (req, res, next) {
     next()
 }
 
-const userExist = async function (req, res, next) {
-    let userId = req.params.userId;
-    let userDetails = await userModel.findById(userId);
-    if (!userDetails)
-        return res.send({ status: false, msg: "No such user exists" });
-    next()
-}
+// const userExist = async function (req, res, next) {
+//     let userId = req.params.userId;
+//     let userDetails = await userModel.findById(userId);
+//     if (!userDetails)
+//         return res.send({ status: false, msg: "No such user exists" });
+//     next()
+// }
 
 
-module.exports.userExist = userExist
+//module.exports.userExist = userExist
 
 module.exports.authenticate = authenticate
 

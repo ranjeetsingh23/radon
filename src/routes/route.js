@@ -17,8 +17,8 @@ router.get("/users/:userId", commonMiddleware.authenticate,commonMiddleware.auth
 
 router.post("/users/:userId/posts", commonMiddleware.authenticate,commonMiddleware.authorise,userController.postMessage)
 
-router.put("/users/:userId", commonMiddleware.authenticate,commonMiddleware.authorise,commonMiddleware.userExist, userController.updateUser)
+router.put("/users/:userId", commonMiddleware.authenticate,commonMiddleware.authorise, userController.updateUser)
 
-router.delete("/users/:userId", commonMiddleware.authenticate,commonMiddleware.authorise,commonMiddleware.userExist, userController.deleteUser)
+router.delete("/users/:userId", commonMiddleware.authenticate,commonMiddleware.authorise, userController.deleteUser)
 
 module.exports = router;
