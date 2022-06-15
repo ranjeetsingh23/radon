@@ -2,26 +2,40 @@ const { count } = require("console")
 const OrderModel = require("../models/orderModel")
 const productModel = require("../models/productModel")
 const userModel = require("../models/userModel")
-const createOrder= async function (req, res) {
-    let data= req.body
-    let user_id = await userModel.find().select({_id:1})
-    user_idArr = user_id.map((x) => {return x._id.toString()})
+const createOrder = async function(req, res) {
+  let orderDetails = req.body
+  let userId = orderDetails.userId
 
-    let product_id = await productModel.find().select({_id:1})
-    product_idArr = product_id.map((x) => {return x._id.toString()})
+  let user = await userModel.findById(userId)
+  if(!user) {
+      return res.send({status: false, message: "user doesnt exist"})
+  }
 
-    if(user_idArr.includes(data.userId) &&  product_idArr.includes(data.productId)){
-      //  if(data.isFreeAppUser == false && data.balance >= productModel.price){
-           
-        let savedData= await OrderModel.create(data)
-        res.send({msg: savedData})
-    //} 
-    //return res.send({msg: "Insufficient Balance"})
-}
-       
-return res.send({msg: "ID not available in database"})
-    
-   
+  let productId = orderDetails.productId
+  let product = await productModel.findById(productId)
+  if(!product) {
+      return res.send({status: false, message: "product doesnt exist"})
+  }
+  
+  //Scenario 1 : Paid app and user balance is greater than or equal to product price
+  if(!req.isfreeappuser && user.balance >= product.price) {
+      user.balance = user.balance - product.price
+      await user.save()
+
+      orderDetails.amount = product.price
+      orderDetails.isFreeAppUser = false
+      let orderCreated = await orderModel.create(orderDetails)
+      return res.send({status: true, data :orderCreated})
+  } else if(!req.appTypeFree) {
+  //Scenario 2 : Paid app and user balance is less than product price
+      return res.send({status: false, message:"User deosnt have sufficient balance"})
+  } else {
+  //Scenario 3 : Free app
+      orderDetails.amount = 0
+      orderDetails.isFreeAppUser = true
+      let orderCreated = await orderModel.create(orderDetails)
+      res.send({status: true, data: orderCreated})
+  }
 }
 
 
