@@ -11,7 +11,10 @@ const authenticate = async function (req, res, next) {
       if (!decodedToken)
           return res.send({ status: false, msg: "token is invalid" });
      console.log(token)
- 
+     let userId = req.params.userId;
+         let userDetails = await userModel.findById(userId);
+          if (!userDetails)
+              return res.send({ status: false, msg: "No such user exists" });
     next()
 }
 
