@@ -21,7 +21,7 @@ const createUser = async function (req, res) {
 };
 
 const loginUser = async function (req, res) {
-  //try{
+  try{
   let userName = req.body.emailId;
   let password = req.body.password;
 
@@ -42,7 +42,7 @@ const loginUser = async function (req, res) {
   // The decision about what data to put in token depends on the business requirement
   // Input 2 is the secret
   // The same secret will be used to decode tokens
-  try{
+  
   let token = jwt.sign(
     {
       userId: user._id.toString(),
