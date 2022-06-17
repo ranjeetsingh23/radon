@@ -19,14 +19,14 @@ let getWeather = async function (req, res) {
     }
 }
 
-let getSortedCities = async function(req,res){
-  try{
-        let cities = ["Bengaluru","Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"]
+let getSortedCities = async function (req, res) {
+    try {
+        let cities = ["Bengaluru", "Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"]
 
         let cityObjArray = []
 
-        for(i=0;i<cities.length;i++){
-            let obj = { city : cities[i]}
+        for (i = 0; i < cities.length; i++) {
+            let obj = { city: cities[i] }
 
             let options = {
                 method: "get",
@@ -36,18 +36,18 @@ let getSortedCities = async function(req,res){
 
             console.log(result.data.main.temp)
 
-             obj.temp=result.data.main.temp
-             cityObjArray.push(obj)
-             }
+            obj.temp = result.data.main.temp
+            cityObjArray.push(obj)  //pushing inside cityObjArray
+        }
 
-             let sorted = cityObjArray.sort( (a,b) => {return a.temp - b.temp})
-             console.log(sorted)
-             res.status(200).send({status:true,data: sorted })
-  }catch(err){
-    console.log(err)
+        let sorted = cityObjArray.sort((a, b) => { return a.temp - b.temp })  //sorting in ascending order
+        console.log(sorted)
+        res.status(200).send({ status: true, data: sorted })
+    } catch (err) {
+        console.log(err)
         res.status(500).send({ msg: err.message })
 
-  }
+    }
 }
 
 module.exports.getSortedCities = getSortedCities
